@@ -1,11 +1,11 @@
 import axios from 'axios';
 import pokemonApi from '../api/PokemonApi';
 import type { PokemonListResponse, Pokemon, PokemonResponse } from '../interfaces/';
-// import { sleep } from './sleep'
+import { sleep } from './sleep'
 
 export const getPokemons = async(): Promise<Pokemon[]> => { 
     //Funcion intencional de hacer mas lenta la aplicacion para observar su funcionamiento
-    // await sleep(2);
+    await sleep(4);
 
     //Llamar a codigo de error desde el usePokemon
     // throw new Error('Error de prueba')

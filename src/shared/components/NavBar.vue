@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, /*toRef*/ } from 'vue';
 import type { RouterLink } from '@/router/list-routes';
 
 
@@ -8,10 +9,17 @@ interface Props {
     isSecondary?: boolean;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
     title: 'CompoApp',
     isSecondary: false,
-})
+});
+
+// const links = toRef(props, 'links');
+const links = computed(() => props.links.filter( link => link.visible ));
+
+//Esto puede perder la reactividad - Es decir si en otro lugar hago que los links cambien
+//de manera dinamica, en este apartado no lo harian
+// const links = props.links;
 
 
 </script>
@@ -25,8 +33,9 @@ withDefaults(defineProps<Props>(), {
             <span>{{ $props.title }}</span>
         </template>
         <!--MOSTRAR MIS ROUTERLINKS CON UN v-for here -->
+        <!--Solo mostrara los que tengan la propiedad de visible-->
         <RouterLink 
-            v-for="link of $props.links"
+            v-for="link of links"
             :key="link.path"
             :to="link.path">
             {{ link.title }}

@@ -7,10 +7,14 @@ import { pokemonRoute } from '../router/index';
 //voy a recorrer mi objeto
 const routeLinks: RouterLink[] = pokemonRoute.children?.map(({ name, path, props }) => {
 
+  //Declare las props, para poder utilizarlas abajo
+  const { title, visible } = props as { title: string, visible: boolean };
+
   return {
     name: name?.toString() ?? '',
     path: path,
-    title: (props as { title: string }).title,
+    title: title,
+    visible: visible,
   }
 }) || [];
 
