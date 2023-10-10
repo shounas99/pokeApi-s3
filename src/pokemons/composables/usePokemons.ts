@@ -1,13 +1,26 @@
-import { computed } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 
 import { getPokemons } from '../helpers/get-pokemons';
 
 export const usePokemons = () => {
+    //composable funcion que envuelve a mi implementacion propia
     const { isLoading, data: pokemons, isError, error } = useQuery(
         ['pokemons'],
-        getPokemons
+        getPokemons,
+        {
+            //Llamar al objeto de configuracion, para que lo intente 1 vez
+            retry: 0,
+            // retryDelay:  Para que despues de cierto tiempo haga la peticion 
+        }
     );
+
+    watchEffect(() => {
+        // console.log('isLoading - ', isLoading.value);
+        // console.log('isError - ', isError.value);
+    })
+
+
 
 
     return {

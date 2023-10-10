@@ -4,6 +4,9 @@ import { VueQueryPlugin } from "@tanstack/vue-query";
 import App from './App.vue'
 import router from './router'
 
+//Inicializar store
+import './store/store';
+
 import './assets/main.css'
 
 
